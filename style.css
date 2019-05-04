@@ -13,17 +13,25 @@ body{
     justify-content: center;
     align-items: center;
 }
+.link{
+    color: black;
+    padding:20px 25px;
+    background-color: grey;
+    border-radius: 8px;
+ 
+}
 .homeBox{
     background-color: rgb(172, 171, 171);
     padding: 25px;
 }
-.homeBox>a{
+.homeBox>a {
     color: black;
     padding: 25px;
     background-color: grey;
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
 }
+
 .homeBox>a:hover{
     background-color: greenyellow;
 }

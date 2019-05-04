@@ -1,6 +1,7 @@
 <?php
-
 require "header.php";
+//die ($_SESSION['loginSuccess']);
+if(!isset($_SESSION['loginSuccess'])){header('Location: login.php');}
 $userLog = $_SESSION['userName'];
 
 try{

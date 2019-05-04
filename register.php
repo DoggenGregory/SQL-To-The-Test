@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" href="fonts/style.css">
     <title>Document</title>
 </head>
 <body>
     <?php
         require "header.php";
-        
+        if(isset($_SESSION['loginSuccess'])){header('Location: home.php');}
+
     ?>
     <div class="box">
         <form action="auth.php" class="form" method="post">
@@ -23,14 +22,15 @@
             <br>
             <p>email</p><input type="text" id="email" name="email" required>
             <br>
-            <p>Password</p><input type="text" id="password" name="password" minlength="4" required>
+            <p>Password</p><input type="password" id="password" name="password" minlength="4" required>
             <br>
-            <p>Password confirm</p><input type="text" id="passwordConf" name="passwordConf" minlength="4" required>
+            <p>Password confirm</p><input type="password" id="passwordConf" name="passwordConf" minlength="4" required>
             
             <?php session_start(); echo "<p>".$_SESSION['errorRegistration']."</p>"; $_SESSION['errorLogin'] = "";?>
             <button type="submit" id="registerButton" name="registerButton">register</button><input type="checkbox" value='false' id="checkPremium" name="checkPremium">Premium
 
         </form>
+        <a class="link" href="login.php">Login</a>
     </div>
 </body>
 </html>

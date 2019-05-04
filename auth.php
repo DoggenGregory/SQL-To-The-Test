@@ -100,10 +100,12 @@ if(isset($_POST['registerButton'])){
             $lName = $_POST["lastName"];
             $email =$_POST["email"];
             $premium = $_POST["checkPremium"];
-            if($premium == on){$premiumState = 1;}else{$premiumState = 0;}
+            $premiumState=0;
+            if($premium == 0){$premiumState = 1;}else{$premiumState = 0;}
+            
+            
+            die(print_r($premiumState));
 
-             //echo  $uName.$fName.$lName.$email. $premiumState.$id  ;
-            //die ($email);
 
             try{
                 $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -117,19 +119,34 @@ if(isset($_POST['registerButton'])){
                 echo "Error: " . $e->getMessage();}
 
     }else if(isset($_POST['delAccount'])){
-        
         sleep(5);
-        die("greg");
-        try{
+        //
+    try{
         $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $stmt = $connection->prepare("DELETE FROM users WHERE id = '$id'"); 
                 $stmt->execute();
-
-            }catch(PDOException $e) {
-                echo "Error: " . $e->getMessage();}  
-    }
-
-        
+                
+            }catch(PDOException $e) { echo "Error: " . $e->getMessage();}  
+            session_destroy();
+            header('Location: home.php');
     
+
+    }else if (isset($_POST['changePassword'])){
+        $password = $_POST["password"];
+        $passwordConf = $_POST["passwordConfirm"];
+        if($password == $passwordConf){
+            $password = hash('sha256',$password);
+            try{
+                $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $stmt = $connection->prepare("UPDATE users SET password = '$password' WHERE id = '$id'"); 
+                $stmt->execute();
+                $_SESSION["loginSuccess"] = "password is changed";
+                header('Location: home.php');
+    
+            }catch(PDOException $e) {
+                echo "Error: " . $e->getMessage();}
+        }
+
+    }
             
 ?>

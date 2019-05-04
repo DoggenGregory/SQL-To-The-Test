@@ -1,6 +1,7 @@
 <?php
     require "header.php";
-    
+    if(!isset($_SESSION['loginSuccess'])){header('Location: login.php');}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,13 +13,11 @@
 </head>
 <body>
     <div class="homeBox">
-        <a href="login.php">Login</a>
-        <a href="register.php">Register</a>
         <a href="profile.php">Your profile</a>
         <a href="account.php">Change account</a>
         <a href="settings.php">profile settings</a>
         <a href="password.php">Change password</a>
-        <a href="auth.php">logout</a>
+        <a href="logout.php">logout</a>
     </div>
 </body>
 </html>
